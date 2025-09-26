@@ -13,14 +13,14 @@ app.use(express.json());
 // Database connection
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 10000, socketTimeoutMS: 45000 })
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  .catch(err => console.error('Database connection error:', err));
 
 // Routes
 app.use('/api/users', userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error('Error occurred:', err);
   res.status(500).send(`Internal Server Error: ${err.message}`);
 });
 
