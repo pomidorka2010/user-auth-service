@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 10000, socketTimeoutMS: 45000 })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
